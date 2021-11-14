@@ -3,7 +3,15 @@ package org.iesalandalus.programacion.torreajedrez;
 public class Posicion {
 	// Atributos privados como nos indica el diagrama
 	private int fila;
+	private char columna;
 
+	// Constructor Posición
+	public Posicion(int fila, char columna) {
+
+		setFila(fila);
+		setColumna(columna);
+	}
+	
 	// Métodos get y set
 	public int getFila() {
 		return fila;
@@ -31,7 +39,5 @@ public class Posicion {
 
 		}
 	}
-
-	private char columna;
 
 }
