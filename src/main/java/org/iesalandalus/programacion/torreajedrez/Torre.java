@@ -11,13 +11,28 @@ public class Torre {
 		color = Color.NEGRO;
 		posicion = new Posicion(8, 'h');
 	}
-	//Constructor que acepta como parámetro el color
+
+	// Constructor que acepta como parámetro el color
 	public Torre(Color color) {
 		setColor(color);
 		if (color == Color.BLANCO) {
 			posicion = new Posicion(1, 'h');
 		} else if (color == Color.NEGRO) {
 			posicion = new Posicion(8, 'h');
+		}
+	}
+
+	// Constructor que acepta como parámetros el color y la columna inicial
+	public Torre(Color color, char columnaInicial) {
+		setColor(color);
+
+		if (columnaInicial != 'a' && columnaInicial != 'h') {
+			throw new IllegalArgumentException("ERROR: Columna no válida.");
+		}
+		if (color == Color.BLANCO) {
+			posicion = new Posicion(1, columnaInicial);
+		} else if (color == Color.NEGRO) {
+			posicion = new Posicion(8, columnaInicial);
 		}
 	}
 
