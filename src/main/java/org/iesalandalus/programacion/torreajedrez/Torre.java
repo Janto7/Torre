@@ -11,6 +11,15 @@ public class Torre {
 		color = Color.NEGRO;
 		posicion = new Posicion(8, 'h');
 	}
+	//Constructor que acepta como parámetro el color
+	public Torre(Color color) {
+		setColor(color);
+		if (color == Color.BLANCO) {
+			posicion = new Posicion(1, 'h');
+		} else if (color == Color.NEGRO) {
+			posicion = new Posicion(8, 'h');
+		}
+	}
 
 	public Color getColor() {
 		return color;
