@@ -2,6 +2,10 @@ package org.iesalandalus.programacion.torreajedrez;
 
 import java.util.Objects;
 
+/**
+ * @author José Antonio Del Rey Martínez
+ *
+ */
 public class Posicion {
 	// Atributos privados como nos indica el diagrama
 	private int fila;
@@ -51,7 +55,7 @@ public class Posicion {
 		}
 	}
 
-	// Métodos equals y hashCode
+	// Métodos equals y hashCode generados automaticamente por ide
 
 	@Override
 	public int hashCode() {
@@ -68,6 +72,12 @@ public class Posicion {
 			return false;
 		Posicion other = (Posicion) obj;
 		return columna == other.columna && fila == other.fila;
+	}
+
+	// toString creado por ide modificado para pasar el test
+	@Override
+	public String toString() {
+		return "fila=" + fila + ", columna=" + columna + "";
 	}
 
 }
