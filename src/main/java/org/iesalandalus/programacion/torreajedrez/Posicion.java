@@ -77,7 +77,7 @@ public class Posicion {
 	// toString creado por ide modificado para pasar el test
 	@Override
 	public String toString() {
-		return "fila=" + fila + ", columna=" + columna + "";
+		return "fila=" + fila + ", columna=" + columna;
 	}
 
 }
