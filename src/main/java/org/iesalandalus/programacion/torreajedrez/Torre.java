@@ -153,6 +153,65 @@ public class Torre {
 
 	}
 
-	
+	public void enrocar(Direccion direccion) throws OperationNotSupportedException {
+		if (direccion == null) {
+			throw new NullPointerException("ERROR: La dirección no puede ser nula.");
+		}
+
+		int fila;
+		char columna;
+
+		switch (direccion) {
+		case ENROQUE_CORTO:
+			fila = posicion.getFila();
+			columna = posicion.getColumna();
+			/*
+			 * Solo tenemos dos tipos de enroques, cortos y largos, solo se pueden dar ambos
+			 * estando en una columna determinada, h y a, solo debemos controlar que nos
+			 * encontramos en esas columnas y filas para hacer un enroque, controlando si el
+			 * color es negro o blanco y posicionarlos en la nueva columna tras realizar el
+			 * enroque.
+			 */
+			if (color == Color.NEGRO) {
+				if (fila == 8 && columna == 'h') {
+					// Los posicionamos en la nueva columna
+					posicion = new Posicion(8, 'f');
+				} else {
+					// Si la operación solicitada no es compatible lo imprimos en consola.
+					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				}
+			} else {
+				if (fila == 1 && columna == 'h') {
+					posicion = new Posicion(1, 'f');
+				} else {
+					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				}
+			}
+
+			break;
+		// Mismo procedimiento para enroque largo, solo que partimos de la columna a
+		// hacia la columna d.
+		case ENROQUE_LARGO:
+			fila = posicion.getFila();
+			columna = posicion.getColumna();
+			if (color == Color.NEGRO) {
+				if (fila == 8 && columna == 'a') {
+					posicion = new Posicion(8, 'd');
+				} else {
+					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				}
+			} else {
+				if (fila == 1 && columna == 'a') {
+					posicion = new Posicion(1, 'd');
+				} else {
+					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				}
+			}
+
+			break;
+		default:
+
+		}
+	}
 
 }
