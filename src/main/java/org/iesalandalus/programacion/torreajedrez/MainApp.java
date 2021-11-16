@@ -35,5 +35,16 @@ public class MainApp {
 			System.out.println("5. Salir");
 		
 	}
+		
+		// Elegir Opción
+		private static int elegirOpcion() {
+			int opcion;
+			do {
+				System.out.print("Introduce una opción: ");
+				opcion = Entrada.entero();
+
+			} while (opcion < 1 || opcion > 5);
+			return opcion;
+		}
 
 }
