@@ -120,6 +120,12 @@ public class MainApp {
 		private static void crearTorreDefecto() {
 			torre = new Torre();
 		}
+		
+		// Crear torre de un color
+		private static void crearTorreColor() {
+			Color color = elegirColor();
+			torre = new Torre(color);
+		}
 
 
 
