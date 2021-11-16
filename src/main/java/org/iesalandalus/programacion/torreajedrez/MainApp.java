@@ -70,6 +70,17 @@ public class MainApp {
 			} while (opcionColumnaInicial != 'a' && opcionColumnaInicial != 'h');
 			return opcionColumnaInicial;
 		}
+		
+		// Elegir Mostrar menú direcciones
+		private static void mostrarMenuDirecciones() {
+			System.out.println("1. Arriba");
+			System.out.println("2. Abajo");
+			System.out.println("3. Izquierda");
+			System.out.println("4. Derecha");
+			System.out.println("5. Enroque Corto");
+			System.out.println("6. Enroque Largo");
+		}
+
 
 
 }
