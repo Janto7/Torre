@@ -2,10 +2,7 @@ package org.iesalandalus.programacion.torreajedrez;
 
 import java.util.Objects;
 
-/**
- * @author José Antonio Del Rey Martínez
- *
- */
+
 public class Posicion {
 	// Atributos privados como nos indica el diagrama
 	private int fila;

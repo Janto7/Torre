@@ -5,10 +5,10 @@ import java.util.Objects;
 import javax.naming.OperationNotSupportedException;
 
 /**
+ /**
  * @author José Antonio Del Rey Martínez
  *
  */
-
 public class Torre {
 
 	// La visibilidad adecuada es privada porque son atributos de clase
@@ -73,9 +73,8 @@ public class Torre {
 		this.posicion = posicion;
 	}
 
-	// Método mover.
+	/** Método mover */
 	public void mover(Direccion direccion, int pasos) throws OperationNotSupportedException {
-		// La dirección no puede ser nula
 		if (direccion == null) {
 			throw new NullPointerException("ERROR: La dirección no puede ser nula.");
 		}
@@ -83,74 +82,42 @@ public class Torre {
 		if (pasos <= 0) {
 			throw new IllegalArgumentException("ERROR: El número de pasos debe ser positivo.");
 		}
-
-		switch (direccion) {
-		case ARRIBA:
-			/*
-			 * Desplazamos la torre por el tablero dependiendo de su color, capturando no se
-			 * salga del tablero.
-			 */
-			try {
-
+		try {
+			// Sumamos los pasos.
+			switch (direccion) {
+			case ARRIBA:
 				if (color == Color.BLANCO) {
-					// Si es torre blanca los pasar a dar seran positivos, solo se desplaza la fila,
-					// la columna sigue siendo la misma.
-					setPosicion(new Posicion(posicion.getFila() + pasos, (char) (posicion.getColumna())));
+					setPosicion(new Posicion(posicion.getFila() + pasos, posicion.getColumna()));
 				} else {
-					// Si es torre negra los pasos a dar seran negativos
-					setPosicion(new Posicion(posicion.getFila() - pasos, (char) (posicion.getColumna())));
-
+					setPosicion(new Posicion(posicion.getFila() - pasos, posicion.getColumna()));
 				}
-			} catch (IllegalArgumentException e) {
-				throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
-			}
-			break;
-		case ABAJO:
-			try {
+				break;
+			case ABAJO:
 				if (color == Color.BLANCO) {
-					// Si es torre blanca los pasos a dar seran negativos, solo se desplaza la fila,
-					// La columna sigue siendo la misma.
-					setPosicion(new Posicion(posicion.getFila() - pasos, (char) (posicion.getColumna())));
+					setPosicion(new Posicion(posicion.getFila() - pasos, posicion.getColumna()));
 				} else {
-					setPosicion(new Posicion(posicion.getFila() + pasos, (char) (posicion.getColumna())));
-
+					setPosicion(new Posicion(posicion.getFila() + pasos, posicion.getColumna()));
 				}
-			} catch (IllegalArgumentException e) {
-				throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
-			}
-			break;
-		case IZQUIERDA:
-
-			try {
+				break;
+			case IZQUIERDA:
 				if (color == Color.BLANCO) {
-					// Ambos colores se mueven en el mismo sentido, las filas siguen siendo la misma
 					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() - pasos)));
 				} else {
-					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() - pasos)));
-
+					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() + pasos)));
 				}
-			} catch (IllegalArgumentException e) {
-				throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
-			}
-			break;
-		case DERECHA:
-			try {
+				break;
+			case DERECHA:
 				if (color == Color.BLANCO) {
-					// Ambos colores se meuven en el mismo sentido, las filas siguen siendo las
-					// mismas.
 					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() + pasos)));
 				} else {
-					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() + pasos)));
-
+					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() - pasos)));
 				}
-			} catch (IllegalArgumentException e) {
-				throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				break;
+			default:
 			}
-			break;
-		default:
-			break;
+		} catch (IllegalArgumentException e) {
+			throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
 		}
-
 	}
 
 	public void enrocar(Direccion direccion) throws OperationNotSupportedException {
@@ -158,13 +125,9 @@ public class Torre {
 			throw new NullPointerException("ERROR: La dirección no puede ser nula.");
 		}
 
-		int fila;
-		char columna;
-
 		switch (direccion) {
 		case ENROQUE_CORTO:
-			fila = posicion.getFila();
-			columna = posicion.getColumna();
+
 			/*
 			 * Solo tenemos dos tipos de enroques, cortos y largos, solo se pueden dar ambos
 			 * estando en una columna determinada, h y a, solo debemos controlar que nos
@@ -173,16 +136,16 @@ public class Torre {
 			 * enroque.
 			 */
 			if (color == Color.NEGRO) {
-				if (fila == 8 && columna == 'h') {
+				if ((posicion.getFila() == 8 && posicion.getColumna() == 'h')) {
 					// Los posicionamos en la nueva columna
-					posicion = new Posicion(8, 'f');
+					setPosicion(new Posicion(posicion.getFila(), 'f'));
 				} else {
 					// Si la operación solicitada no es compatible lo imprimos en consola.
 					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
 				}
 			} else {
-				if (fila == 1 && columna == 'h') {
-					posicion = new Posicion(1, 'f');
+				if ((posicion.getFila() == 1 && posicion.getColumna() == 'h')) {
+					setPosicion(new Posicion(posicion.getFila(), 'f'));
 				} else {
 					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
 				}
@@ -192,17 +155,16 @@ public class Torre {
 		// Mismo procedimiento para enroque largo, solo que partimos de la columna a
 		// hacia la columna d.
 		case ENROQUE_LARGO:
-			fila = posicion.getFila();
-			columna = posicion.getColumna();
+
 			if (color == Color.NEGRO) {
-				if (fila == 8 && columna == 'a') {
-					posicion = new Posicion(8, 'd');
+				if (posicion.getFila() == 8 && posicion.getColumna() == 'a') {
+					setPosicion(new Posicion(posicion.getFila(), 'd'));
 				} else {
 					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
 				}
 			} else {
-				if (fila == 1 && columna == 'a') {
-					posicion = new Posicion(1, 'd');
+				if (posicion.getFila() == 1 && posicion.getColumna() == 'a') {
+					setPosicion(new Posicion(posicion.getFila(), 'd'));
 				} else {
 					throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
 				}
