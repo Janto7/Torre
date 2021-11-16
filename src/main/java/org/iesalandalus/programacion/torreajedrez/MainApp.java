@@ -115,6 +115,11 @@ public class MainApp {
 			}
 			return direccion;
 		}
+		
+		// Crear torre por defecto
+		private static void crearTorreDefecto() {
+			torre = new Torre();
+		}
 
 
 
