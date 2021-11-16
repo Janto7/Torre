@@ -46,5 +46,20 @@ public class MainApp {
 			} while (opcion < 1 || opcion > 5);
 			return opcion;
 		}
+		// Elegir Color
+		private static Color elegirColor() {
+			int opcionColor;
+			do {
+				System.out.print("Introduce 1 si quieres color blanco o 2 si quieres color negro: ");
+				opcionColor = Entrada.entero();
+			} while (opcionColor < 1 && opcionColor > 2);
+
+			if (opcionColor == 1) {
+				return Color.BLANCO;
+			} else {
+				return Color.NEGRO;
+			}
+		}
+
 
 }
