@@ -126,6 +126,13 @@ public class MainApp {
 			Color color = elegirColor();
 			torre = new Torre(color);
 		}
+		
+		// Crear torre color columna
+		private static void crearTorreColorColumna() {
+			Color color = elegirColor();
+			char columnaInicial = elegirColumnaInicial();
+			torre = new Torre(color, columnaInicial);
+		}
 
 
 
