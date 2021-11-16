@@ -133,6 +133,41 @@ public class MainApp {
 			char columnaInicial = elegirColumnaInicial();
 			torre = new Torre(color, columnaInicial);
 		}
+		
+		// Mover
+		private static void mover() {
+			if (torre == null) {
+				System.out.println("Debes crear una torre antes de moverla.");
+
+				return;
+			}
+			mostrarMenuDirecciones();
+			Direccion direccion = elegirDireccion();
+			// Solos nos preguntara los pasos a dar cuando no usemos enroques
+			if (direccion != Direccion.ENROQUE_CORTO && direccion != Direccion.ENROQUE_LARGO) {
+				System.out.print("¿Cuántos pasos quieres que dé la torre?: ");
+				int pasos = Entrada.entero();
+
+				try {
+					torre.mover(direccion, pasos);
+				} catch (OperationNotSupportedException | NullPointerException e) {
+					System.out.println(e.getMessage());
+				}
+				// si no vamos a mover, enrocamos
+			} else {
+				try {
+					torre.enrocar(direccion);
+					if (direccion == Direccion.ENROQUE_CORTO ) {
+					System.out.print("El enroque corto ha sido un éxito, buena jugada ;)\n");
+					} else {
+						System.out.print("El enroque largo ha sido un éxito, buena jugada ;)\n");
+					}
+					
+				} catch (OperationNotSupportedException | NullPointerException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
 
 
 
