@@ -21,9 +21,9 @@ public class MainApp {
 	// Metodo Mostrar Torre
 	private static void mostrarTorre() {
 		if (torre != null && !salir) {
-			System.out.println("------------------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------------");
 			System.out.println(torre);
-			System.out.println("------------------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------------");
 		}
 	}
 
